@@ -53,8 +53,8 @@
 
 ## 环境要求
 
-- Node.js >= 16.0.0
-- MySQL >= 5.7
+- Node.js >= 20.0.0
+- MySQL >= 8.0
 - Redis >= 6.0
 
 ## 快速开始
@@ -68,6 +68,10 @@ cd egg-backend
 
 # 安装依赖
 npm install
+
+# 创建.env文件
+cp .env.example .env
+# 编辑.env文件，配置您的环境变量
 
 # 创建数据库
 npm run db:create
@@ -85,6 +89,10 @@ npm run dev
 ### Docker 部署
 
 ```bash
+# 配置环境变量
+cp .env.example .env
+# 编辑.env文件，配置您的环境变量
+
 # 构建并启动容器
 docker-compose up -d
 
@@ -141,8 +149,10 @@ API 文档可通过以下方式访问：
 
 ### 环境变量
 
-项目支持通过环境变量配置，主要环境变量如下：
+项目支持通过`.env`文件配置环境变量，主要环境变量如下：
 
+- `NODE_ENV` - 运行环境 (development, production)
+- `EGG_SERVER_ENV` - Egg.js 服务环境 (local, prod)
 - `DB_HOST` - MySQL 主机地址
 - `DB_PORT` - MySQL 端口
 - `DB_DATABASE` - MySQL 数据库名
@@ -157,6 +167,9 @@ API 文档可通过以下方式访问：
 - `QINIU_BUCKET` - 七牛云存储空间
 - `QINIU_REGION` - 七牛云存储区域
 - `QINIU_BASE_URL` - 七牛云访问地址
+- `MYSQL_ROOT_PASSWORD` - MySQL根密码（Docker部署使用）
+- `MYSQL_DATABASE` - MySQL数据库名（Docker部署使用）
+- `MYSQL_ROOT_HOST` - MySQL允许连接的主机（Docker部署使用）
 
 ## 许可证
 

@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   app:
     image: 3a119f63d294
@@ -9,23 +7,8 @@ services:
     depends_on:
       - mysql
       - redis
-    environment:
-      - NODE_ENV=production
-      - EGG_SERVER_ENV=prod
-      - DB_HOST=mysql
-      - DB_PORT=3306
-      - DB_DATABASE=egg_backend
-      - DB_USERNAME=root
-      - DB_PASSWORD=123456
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - REDIS_PASSWORD=
-      - JWT_SECRET=egg-backend-jwt-secret
-      - QINIU_ACCESS_KEY=
-      - QINIU_SECRET_KEY=
-      - QINIU_BUCKET=
-      - QINIU_REGION=z0
-      - QINIU_BASE_URL=
+    env_file:
+      - ./.env
     volumes:
       - ./logs:/app/logs
     restart: always
@@ -34,20 +17,20 @@ services:
     image: 2700d94f59a8
     ports:
       - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=egg_backend
-      - MYSQL_ROOT_HOST=%
+    env_file:
+      - ./.env
     volumes:
       - mysql-data:/var/lib/mysql
       - ./deploy/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     restart: always
-    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    command: --authentication-policy=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
   redis:
     image: 9203d186d252
     ports:
       - "6379:6379"
+    env_file:
+      - ./.env
     volumes:
       - redis-data:/data
     restart: always
