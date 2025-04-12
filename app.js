@@ -37,7 +37,7 @@ class AppBootHook {
     
     // 开发环境同步数据库表结构
     if (this.app.config.env === 'local' || this.app.config.env === 'unittest') {
-      await this.app.model.sync({ alter: true });
+      // await this.app.model.sync({ alter: true });
     }
   }
 

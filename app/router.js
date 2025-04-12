@@ -5,7 +5,7 @@
  */
 module.exports = app => {
   const { router, controller, middleware } = app;
-  const jwt = middleware.jwt();
+  const jwt = middleware.jwt({}, app);
 
   // 健康检查
   router.get('/', controller.home.index);

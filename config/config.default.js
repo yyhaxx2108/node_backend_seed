@@ -1,6 +1,7 @@
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
+require('dotenv').config();
 
 /**
  * @param {Egg.EggAppInfo} appInfo app info

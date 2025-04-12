@@ -1,6 +1,7 @@
 'use strict';
 
 const { Controller } = require('egg');
+const { Op } = require('sequelize'); 
 
 class AuthController extends Controller {
   /**
@@ -21,7 +22,7 @@ class AuthController extends Controller {
       // 检查用户名和邮箱是否已存在
       const existUser = await service.user.findOne({
         where: {
-          $or: [{ username }, { email }],
+          [Op.or]: [{ username }, { email }],
         },
       });
       
