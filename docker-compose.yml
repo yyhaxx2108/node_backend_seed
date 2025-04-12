@@ -2,6 +2,7 @@ version: '3'
 
 services:
   app:
+    image: 3a119f63d294
     build: .
     ports:
       - "7001:7001"
@@ -30,19 +31,21 @@ services:
     restart: always
 
   mysql:
-    image: mysql:8
+    image: 2700d94f59a8
     ports:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=123456
       - MYSQL_DATABASE=egg_backend
+      - MYSQL_ROOT_HOST=%
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./deploy/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     restart: always
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
   redis:
-    image: redis:6-alpine
+    image: 9203d186d252
     ports:
       - "6379:6379"
     volumes:
